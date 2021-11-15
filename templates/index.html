@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}<br>
+    <center>
+    <div class="container"><br>
+        <h4>REAL TIME BITCOIN PRICE TICKER APPS👌</h2>
+        <br>
+        <div class="col-md-4">
+            <div class="card rounded shadow">
+                <div class="card-image">
+                    <img class="img-fluid"  src="{% static 'img/bitcoin2.jpg' %}"  alt="Alternate Text" />
+                </div>
+                <div class="card-body text-center">
+                    <div class="ad-title m-auto">
+                        <h3 id="result">Loading...</h3>
+                    </div>
+                    {% comment %} <a class="ad-btn" href="#">View</a> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </center>   
+  <script>
+     $(document).ready(function(){
+      setInterval(function(){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'realtime' %}",
+            success: function(response){
+                console.log(response)
+                $("#result").text(response.price);
+            },
+            error: function(response){
+                console.log("An error occurred!!!")
+            }
+        });
+      },1000);
+
+     }); 
+  </script>
+    
+
+
+<div class="p-5 m-5"></div>
+<div class="p-5 m-5"></div>
+<div class="p-5 m-5"></div>    
+{% endblock %}
